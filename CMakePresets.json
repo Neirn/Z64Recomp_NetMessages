@@ -1,0 +1,142 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "vcpkg",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+            }
+        },
+        {
+            "name": "default",
+            "displayName": "Default Config",
+            "hidden": true,
+            "inherits": "vcpkg",
+            "description": "Default build using Ninja generator",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "minsizerel",
+            "displayName": "MinSizeRel",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "MinSizeRel"
+            }
+        },
+        {
+            "name": "relwithdebinfo",
+            "displayName": "RelWithDebInfo",
+            "inherits": "default",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "release-build-all",
+            "displayName": "Release Build All",
+            "configurePreset": "release"
+        },
+        {
+            "name": "debug-build-all",
+            "displayName": "Debug Build All",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "minsizerel-build-all",
+            "displayName": "MinSizeRel Build All",
+            "configurePreset": "minsizerel"
+        },
+        {
+            "name": "relwithdebinfo-build-all",
+            "displayName": "RelWithDebInfo Build All",
+            "configurePreset": "relwithdebinfo"
+        },
+        {
+            "name": "release-build-client",
+            "displayName": "Release Build Client",
+            "configurePreset": "release",
+            "targets": [
+                "yazmt_networkmod_client"
+            ]
+        },
+        {
+            "name": "debug-build-client",
+            "displayName": "Debug Build Client",
+            "configurePreset": "debug",
+            "targets": [
+                "yazmt_networkmod_client"
+            ]
+        },
+        {
+            "name": "minsizerel-build-client",
+            "displayName": "MinSizeRel Build Client",
+            "configurePreset": "minsizerel",
+            "targets": [
+                "yazmt_networkmod_client"
+            ]
+        },
+        {
+            "name": "relwithdebinfo-build-client",
+            "displayName": "RelWithDebInfo Build Client",
+            "configurePreset": "relwithdebinfo",
+            "targets": [
+                "yazmt_networkmod_client"
+            ]
+        },
+        {
+            "name": "release-build-server",
+            "displayName": "Release Build Server",
+            "configurePreset": "release",
+            "targets": [
+                "networkmod_server"
+            ]
+        },
+        {
+            "name": "debug-build-server",
+            "displayName": "Debug Build Server",
+            "configurePreset": "debug",
+            "targets": [
+                "networkmod_server"
+            ]
+        },
+        {
+            "name": "minsizerel-build-server",
+            "displayName": "MinSizeRel Build Server",
+            "configurePreset": "minsizerel",
+            "targets": [
+                "networkmod_server"
+            ]
+        },
+        {
+            "name": "relwithdebinfo-build-server",
+            "displayName": "RelWithDebInfo Build Server",
+            "configurePreset": "relwithdebinfo",
+            "targets": [
+                "networkmod_server"
+            ]
+        }
+    ]
+}
