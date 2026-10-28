@@ -1,5 +1,5 @@
 {
-    "version": 2,
+    "version": 5,
     "configurePresets": [
         {
             "name": "vcpkg",
@@ -14,129 +14,121 @@
             "hidden": true,
             "inherits": "vcpkg",
             "description": "Default build using Ninja generator",
-            "binaryDir": "${sourceDir}/build/${presetName}",
+            "binaryDir": "${sourceDir}/build/${presetName}/",
+            "installDir": "${sourceDir}/install/${presetName}/",
             "generator": "Ninja",
             "cacheVariables": {
-                "CMAKE_EXPORT_COMPILE_COMMANDS": true
+                "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+                "CMAKE_SHARED_LIBRARY_PREFIX_CXX": ""
             }
         },
         {
-            "name": "release",
-            "displayName": "Release",
+            "name": "macos-base",
             "inherits": "default",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Darwin"
+            }
+        },
+        {
+            "name": "macos-arm64-debug",
+            "displayName": "arm64 Debug",
+            "inherits": "macos-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_OSX_ARCHITECTURES": "arm64",
+                "VCPKG_OSX_ARCHITECTURES": "arm64"
+            }
+        },
+        {
+            "name": "macos-arm64-release",
+            "displayName": "arm64 Release",
+            "inherits": "macos-arm64-debug",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
-            "name": "debug",
-            "displayName": "Debug",
+            "name": "macos-x64-debug",
+            "displayName": "x64 Debug",
+            "inherits": "macos-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_OSX_ARCHITECTURES": "x86_64",
+                "VCPKG_OSX_ARCHITECTURES": "x86_64"
+            }
+        },
+        {
+            "name": "macos-x64-release",
+            "displayName": "x64 Release",
+            "inherits": "macos-x64-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        },
+        {
+            "name": "windows-base",
             "inherits": "default",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-cl.exe",
+                "CMAKE_CXX_COMPILER": "clang-cl.exe",
+                "VCPKG_TARGET_TRIPLET": "x64-windows-static-md",
+                "VCPKG_HOST_TRIPLET": "x64-windows-static-md"
+            },
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Windows"
+            }
+        },
+        {
+            "name": "windows-x64-debug",
+            "displayName": "x64 Debug",
+            "inherits": "windows-base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         },
         {
-            "name": "minsizerel",
-            "displayName": "MinSizeRel",
-            "inherits": "default",
+            "name": "windows-x64-release",
+            "displayName": "x64 Release",
+            "inherits": "windows-x64-debug",
             "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "MinSizeRel"
+                "CMAKE_BUILD_TYPE": "Release"
             }
         },
         {
-            "name": "relwithdebinfo",
-            "displayName": "RelWithDebInfo",
+            "name": "linux-base",
             "inherits": "default",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            "hidden": true,
+            "condition": {
+                "type": "equals",
+                "lhs": "${hostSystemName}",
+                "rhs": "Linux"
             }
-        }
-    ],
-    "buildPresets": [
-        {
-            "name": "release-build-all",
-            "displayName": "Release Build All",
-            "configurePreset": "release"
         },
         {
-            "name": "debug-build-all",
-            "displayName": "Debug Build All",
-            "configurePreset": "debug"
+            "name": "linux-x64-debug",
+            "displayName": "x64 Debug",
+            "inherits": "linux-base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
         },
         {
-            "name": "minsizerel-build-all",
-            "displayName": "MinSizeRel Build All",
-            "configurePreset": "minsizerel"
-        },
-        {
-            "name": "relwithdebinfo-build-all",
-            "displayName": "RelWithDebInfo Build All",
-            "configurePreset": "relwithdebinfo"
-        },
-        {
-            "name": "release-build-client",
-            "displayName": "Release Build Client",
-            "configurePreset": "release",
-            "targets": [
-                "yazmt_networkmod_client"
-            ]
-        },
-        {
-            "name": "debug-build-client",
-            "displayName": "Debug Build Client",
-            "configurePreset": "debug",
-            "targets": [
-                "yazmt_networkmod_client"
-            ]
-        },
-        {
-            "name": "minsizerel-build-client",
-            "displayName": "MinSizeRel Build Client",
-            "configurePreset": "minsizerel",
-            "targets": [
-                "yazmt_networkmod_client"
-            ]
-        },
-        {
-            "name": "relwithdebinfo-build-client",
-            "displayName": "RelWithDebInfo Build Client",
-            "configurePreset": "relwithdebinfo",
-            "targets": [
-                "yazmt_networkmod_client"
-            ]
-        },
-        {
-            "name": "release-build-server",
-            "displayName": "Release Build Server",
-            "configurePreset": "release",
-            "targets": [
-                "networkmod_server"
-            ]
-        },
-        {
-            "name": "debug-build-server",
-            "displayName": "Debug Build Server",
-            "configurePreset": "debug",
-            "targets": [
-                "networkmod_server"
-            ]
-        },
-        {
-            "name": "minsizerel-build-server",
-            "displayName": "MinSizeRel Build Server",
-            "configurePreset": "minsizerel",
-            "targets": [
-                "networkmod_server"
-            ]
-        },
-        {
-            "name": "relwithdebinfo-build-server",
-            "displayName": "RelWithDebInfo Build Server",
-            "configurePreset": "relwithdebinfo",
-            "targets": [
-                "networkmod_server"
-            ]
+            "name": "linux-x64-release",
+            "displayName": "x64 Release",
+            "inherits": "linux-x64-debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
         }
     ]
 }

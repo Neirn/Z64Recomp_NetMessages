@@ -9,7 +9,7 @@ IndentCaseLabels: true
 ColumnLimit: 0
 AccessModifierOffset: -4
 SortIncludes: false
-IndentExternBlock: Indent
+IndentExternBlock: NoIndent
 AttributeMacros:
     - RECOMP_IMPORT
     - RECOMP_EXPORT
@@ -19,3 +19,5 @@ AttributeMacros:
     - RECOMP_CALLBACK
     - RECOMP_HOOK
     - RECOMP_HOOK_RETURN
+    - PTR
+    - ALIGN_AS

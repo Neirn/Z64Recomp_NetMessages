@@ -1,5 +1,7 @@
 {
   "dependencies": [
-    "gamenetworkingsockets"
+    "alpaca",
+    "gamenetworkingsockets",
+    "argparse"
   ]
 }

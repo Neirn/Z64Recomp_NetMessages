@@ -1,0 +1,5 @@
+add_library(yazmt_z64_netmessages_client SHARED recompinterop.cpp recompclient.cpp )
+
+target_link_libraries(yazmt_z64_netmessages_client PUBLIC GameNetworkingSockets::static Z64RecompNetworkMod::common)
+
+target_include_directories(yazmt_z64_netmessages_client PUBLIC include)

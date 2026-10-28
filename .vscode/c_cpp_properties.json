@@ -1,0 +1,68 @@
+{
+    "configurations": [
+        {
+            "name": "Extlib",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/extlib/common/include_public/**"
+            ],
+            "defines": [],
+            "cStandard": "c17",
+            "cppStandard": "gnu++20",
+            "intelliSenseMode": "clang-x64",
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "compilerPath": "clang++",
+            "mergeConfigurations": true
+        },
+        {
+            "name": "Mod",
+            "includePath": [
+                "${workspaceFolder}/include_shared",
+                "${workspaceFolder}/mod/include",
+                "${workspaceFolder}/mod/include/dummy_headers",
+                "${workspaceFolder}/mod/mm-decomp/include",
+                "${workspaceFolder}/mod/mm-decomp/include/libc",
+                "${workspaceFolder}/mod/mm-decomp/src",
+                "${workspaceFolder}/mod/mm-decomp/extracted/n64-us",
+                "${workspaceFolder}/public_api"
+            ],
+            "defines": [
+                "F3DEX_GBI_2",
+                "_LANGUAGE_C",
+                "MIPS",
+                "F3DEX_GBI_2",
+                "F3DEX_GBI_PL",
+                "GBI_DOWHILE",
+                "LOGGER_PROJECT_NAME=\"NetMessages\"",
+                "NETMESSAGES_LOCAL_API"
+            ],
+            "compilerPath": "clang",
+            "cStandard": "gnu17",
+            "intelliSenseMode": "clang-x86",
+            "compilerArgs": [
+                "\"-target\", \"mips\"",
+                "-mips2",
+                "-mabi=32",
+                "-mno-abicalls",
+                "-mno-odd-spreg",
+                "-mno-check-zero-division",
+                "-fomit-frame-pointer",
+                "-ffast-math",
+                "-fno-unsafe-math-optimizations",
+                "-fno-builtin-memset",
+                "-Wall",
+                "-Wextra",
+                "-Wno-incompatible-library-redeclaration",
+                "-Wno-unused-parameter",
+                "-Wno-unknown-pragmas",
+                "-Wno-unused-variable",
+                "-Wno-missing-braces",
+                "-Wno-unsupported-floating-point-opt",
+                "-Werror=section",
+                "-nostdinc"
+            ],
+            "mergeConfigurations": false
+        }
+    ],
+    "version": 4
+}

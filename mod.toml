@@ -1,0 +1,171 @@
+# Config file for an example Majora's Mask: Recompiled mod.
+
+# Fields that end up in the mod's manifest.
+[manifest]
+
+# Unique ID of this mod. Pick something long enough that it'll never be the same as any other mod.
+# The name displayed in the mod management menu is separate from this so this doesn't need to be human readable.
+id = "yazmt_z64_netmessages"
+
+# Version of this mod.
+version = "0.0.0"
+
+# The name that will show up for this mod in the mod menu. This should be human readable.
+display_name = "Net Messages"
+
+# The description that will show up when this mod is displayed in the mod menu. This should be human readable.
+description =  """\
+Exchange messages between Zelda64: Recompiled clients over a network."""
+
+# A short description that will show up in this mod's entry in the mod list. This should be human readable and kept short
+# to prevent it from being cut off due to the limited space.
+short_description = "Exchange messages between recomp clients online."
+
+# Authors of this mod.
+authors = [ "Neirn" ]
+
+# ID of the target recomp game.
+game_id = "mm"
+
+# Minimum version of the target recomp (e.g. Zelda 64: Recompiled) that this mod can run on.
+minimum_recomp_version = "1.2.2"
+
+# Dependency mods. Each entry is the mod's ID and then an optional minimum version of the dependency mod.
+dependencies = [
+# Example dependency:
+#    "modname:1.0.0"
+    "yazmt_mm_corelib:0.1.1",
+]
+
+# Optional dependency mods. This has the same format as `dependencies`, but the game will still start if dependencies in this
+# list aren't present. You can query the presence of a given dependency by using `recomp_is_dependency_met` in recomputils.h.
+# Calling a function imported from an optional dependency that isn't present will trigger an error.
+optional_dependencies = [
+
+]
+
+# Native libraries (e.g. DLLs) and the functions they export.
+native_libraries = [
+# Example native library:
+#    { name = "my_native_library", funcs = ["my_native_library_function"] }
+    { name = "yazmt_z64_netmessages_client", funcs = [
+        "NetMessagesExt_init",
+        "NetMessagesExt_connect",
+        "NetMessagesExt_disconnect",
+        "NetMessagesExt_doPolling",
+        "NetMessagesExt_isClientEventPending",
+        "NetMessagesExt_retrieveNextClientEvent",
+        "NetMessagesExt_sendMessage",
+        "NetMessagesExt_requestLeader",
+        "NetMessagesExt_releaseLeader",
+        "NetMessagesExt_subscribeToMessageGroup",
+        "NetMessagesExt_unsubscribeFromMessageGroup",
+        "NetMessagesExt_sendSceneIdUpdate",
+        "NetMessagesExt_getClientNickname",
+    ] }
+]
+
+# Inputs to the mod tool.
+[inputs]
+
+# Input elf file to generate a mod from.
+elf_path = "build/mod/mod.elf"
+
+# Output mod filename.
+mod_filename = "yazmt_z64_netmessages"
+
+# Reference symbol files.
+func_reference_syms_file = "mod/Zelda64RecompSyms/mm.us.rev1.syms.toml"
+data_reference_syms_files = [ "mod/Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "mod/Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
+
+# Additional files to include in the mod.
+additional_files = [ ]
+
+[[manifest.config_options]]
+id = "nickname"
+name = "Nickname"
+description = """\
+The name you would like to be identified by.
+
+Maximum length is limited to 31 characters.\
+"""
+type = "String"
+default = "LINK"
+
+[[manifest.config_options]]
+id = "room_name"
+name = "Room Name"
+description = """\
+Name of the room wish to join. This is case sensitive.
+
+To play with friends, simply make sure everyone is connected to the same room.
+
+Maximum length is limited to 63 characters.\
+"""
+type = "String"
+default = ""
+
+[[manifest.config_options]]
+id = "server_ip"
+name = "Server IP"
+description = """\
+Server host to connect to.
+
+Most users won't need to change this. To play in a session with friends, all \
+you need to do is join the same room.
+
+Public Instance
+| <FILL_ME_IN_LATER>"""
+type = "String"
+default = ""
+
+[[manifest.config_options]]
+id = "logging_level"
+name = "Console Log Level"
+description = """
+Set the level of console logging.
+
+ALL: Display every logged message
+
+VERBOSE: Display every logged message with priority VERBOSE or above
+
+INFO: Display every logged message with priority INFO or above
+
+WARNING: Display every logged message with priority WARNING or above
+
+ERROR: Display every logged message with priority ERROR or above
+
+NONE: Do not display logged messages from this mod\
+"""
+type = "Enum"
+options = [ "ALL", "VERBOSE", "INFO", "WARNING", "ERROR", "NONE" ]
+default = "WARNING"
+
+[[manifest.config_options]]
+id = "third_party_disclosure"
+name = "THIRD PARTY"
+description = """\
+This mod includes the code of several third party packages to function.
+
+The packages have been grouped by license type below.
+
+BSD-3-Clause
+    | GameNetworkingSockets
+
+MIT
+    | alpaca
+
+BSD-3-Clause-Like
+    | protobuf
+
+Apache-2.0
+    | Abseil
+    | OpenSSL
+
+For the full license text of as well as links to each package, please see the \
+included THIRD_PARTY_LICENSES text file in the zip you obtained this mod from. \
+This file can also be found on the mod's GitHub repo.\
+"""
+type = "Enum"
+options = [ "ABOUT" ]
+default = "ABOUT"

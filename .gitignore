@@ -44,11 +44,13 @@ build/
 Build/
 build-*/
 
+# Install directory
+install/
+
 # CMake generated files
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
-Makefile
 install_manifest.txt
 compile_commands.json
 
@@ -70,3 +72,9 @@ Testing/
 
 # CMake User Presets
 CMakeUserPresets.json
+
+# .vscode
+.vscode/*
+!.vscode/c_cpp_properties.json
+build_run.bat
+Zelda64Recompiled.exe - Shortcut.lnk

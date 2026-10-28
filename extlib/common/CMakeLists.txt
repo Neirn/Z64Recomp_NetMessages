@@ -1,0 +1,10 @@
+find_package(alpaca CONFIG REQUIRED)
+
+add_library(yazmt_z64_netmessages_common STATIC clientservercommon.cpp)
+add_library(Z64RecompNetworkMod::common ALIAS yazmt_z64_netmessages_common)
+
+include_directories(yazmt_z64_netmessages_common include)
+
+target_include_directories(yazmt_z64_netmessages_common PUBLIC include_public)
+
+target_link_libraries(yazmt_z64_netmessages_common PRIVATE alpaca::alpaca)
